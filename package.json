@@ -1,0 +1,48 @@
+{
+  "name": "power-rankings-markdown-cli",
+  "version": "0.0.1",
+  "description": "CLI tool for generating Markdown for power rankings posts with Sleeper data",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "nyc --reporter=text mocha",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/the-winner-is-a-tryhard/power-rankings-markdown-cli.git"
+  },
+  "author": "Scottie Enriquez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/the-winner-is-a-tryhard/power-rankings-markdown-cli/issues"
+  },
+  "homepage": "https://github.com/the-winner-is-a-tryhard/power-rankings-markdown-cli#readme",
+  "bin": {
+    "spr": "./bin/index.js"
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "commander": "^6.0.0",
+    "inquirer": "^7.3.3",
+    "node-emoji": "^1.10.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^9.0.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-config-wesbos": "0.0.20",
+    "eslint-plugin-html": "^6.0.3",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "mocha": "^8.1.1",
+    "nyc": "^15.1.0",
+    "prettier": "^1.19.1"
+  }
+}
