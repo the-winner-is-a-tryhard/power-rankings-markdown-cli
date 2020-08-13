@@ -1,0 +1,22 @@
+trigger:
+  branches:
+    include:
+      - '*'
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+  displayName: 'Install NPM dependencies'
+
+- script: |
+    npm audit
+    npm run lint
+    npm test
+  displayName: 'Run audit, linting, and tests'
