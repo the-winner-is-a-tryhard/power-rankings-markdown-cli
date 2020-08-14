@@ -11,7 +11,7 @@ describe('Author validation', () => {
     const expectedOutput = 'Scottie Enriquez'
 
     // act
-    const actualOutput = validateAuthor(authorArgument)
+    const actualOutput = validateAuthor(authorArgument, true)
 
     // assert
     assert.equal(expectedOutput, actualOutput)
@@ -19,10 +19,10 @@ describe('Author validation', () => {
   it('should not crash on bad input', () => {
     // arrange
     const authorArgument = null
-    const expectedOutput = undefined
+    const expectedOutput = null
 
     // act
-    const actualOutput = validateAuthor(authorArgument)
+    const actualOutput = validateAuthor(authorArgument, true)
 
     // assert
     assert.equal(expectedOutput, actualOutput)
@@ -30,10 +30,10 @@ describe('Author validation', () => {
   it('should not return anything for invalid league member', () => {
     // arrange
     const authorArgument = 'No one'
-    const expectedOutput = undefined
+    const expectedOutput = null
 
     // act
-    const actualOutput = validateAuthor(authorArgument)
+    const actualOutput = validateAuthor(authorArgument, true)
 
     // assert
     assert.equal(expectedOutput, actualOutput)

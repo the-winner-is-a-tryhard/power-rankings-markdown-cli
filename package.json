@@ -24,6 +24,7 @@
     "spr": "./bin/index.js"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "colors": "^1.4.0",
     "commander": "^6.0.0",
     "inquirer": "^7.3.3",

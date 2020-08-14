@@ -1,5 +1,5 @@
 import { createRequire } from 'module'
-import { capitalizeOnlyFirstLetter } from '../lib/utility/casing.js'
+import { capitalizeOnlyFirstLetter } from '../lib/service/casing.js'
 
 const require = createRequire(import.meta.url)
 const assert = require('assert')
