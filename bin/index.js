@@ -6,7 +6,7 @@ import { generateRandomAdjective } from '../lib/service/adjective.js'
 import { capitalizeOnlyFirstLetter } from '../lib/service/casing.js'
 import { validateAuthor } from '../lib/validation/author.js'
 import { validateWeek } from '../lib/validation/week.js'
-import { getLeagueMembers } from '../lib/league/sleeper.js'
+import { getLeagueMembers, getLeagueRosters } from '../lib/league/sleeper.js'
 import { generateMarkdown } from '../lib/service/markdown.js'
 
 const require = createRequire(import.meta.url)
@@ -24,13 +24,15 @@ program
     const normalizedAuthorFirstName = validateAuthor(author)
     const validatedWeekInteger = validateWeek(parseInt(week))
     if (normalizedAuthorFirstName && validatedWeekInteger) {
-      generateMarkdown(
+      const markdownText = generateMarkdown(
         normalizedAuthorFirstName,
         authors[normalizedAuthorFirstName],
         capitalizeOnlyFirstLetter(weeks[validatedWeekInteger]),
         generateRandomAdjective(),
-        await getLeagueMembers()
+        await getLeagueMembers(),
+        await getLeagueRosters()
       )
+      console.log(markdownText)
     }
   })
 program.parse(process.argv)
