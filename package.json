@@ -28,7 +28,8 @@
     "colors": "^1.4.0",
     "commander": "^6.0.0",
     "inquirer": "^7.3.3",
-    "node-emoji": "^1.10.0"
+    "node-emoji": "^1.10.0",
+    "sentencer": "^0.2.1"
   },
   "devDependencies": {
     "babel-eslint": "^9.0.0",

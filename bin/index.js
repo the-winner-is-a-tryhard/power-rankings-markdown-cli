@@ -2,6 +2,7 @@
 import { createRequire } from 'module'
 import { authors } from '../lib/config/validAuthors.js'
 import { weeks } from '../lib/config/validWeeks.js'
+import { generateRandomAdjective } from '../lib/service/adjective.js'
 import { capitalizeOnlyFirstLetter } from '../lib/service/casing.js'
 import { validateAuthor } from '../lib/validation/author.js'
 import { validateWeek } from '../lib/validation/week.js'
@@ -27,6 +28,7 @@ program
         normalizedAuthorFirstName,
         authors[normalizedAuthorFirstName],
         capitalizeOnlyFirstLetter(weeks[validatedWeekInteger]),
+        generateRandomAdjective(),
         await getLeagueMembers()
       )
     }

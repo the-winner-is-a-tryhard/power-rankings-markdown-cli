@@ -8,7 +8,7 @@ describe('Author validation', () => {
   it('should validate and normalize a league member', () => {
     // arrange
     const authorArgument = 'scottie'
-    const expectedOutput = 'Scottie Enriquez'
+    const expectedOutput = 'Scottie'
 
     // act
     const actualOutput = validateAuthor(authorArgument, true)
