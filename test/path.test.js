@@ -1,7 +1,9 @@
 import { createRequire } from 'module'
 import {
+  createNewPostDirectoryName,
   createPathForGatsbyConfig,
   createPathForNewAvatar,
+  createPathForNewPostDirectory,
 } from '../lib/service/path.js'
 
 const require = createRequire(import.meta.url)
@@ -35,6 +37,35 @@ describe('Path', () => {
       presentWorkingDirectory,
       newPostDirectory,
       fileName
+    )
+
+    // assert
+    assert.equal(expectedOutput, actualOutput)
+  })
+  it('should create a new post directory name with lowercase letter for week and author', () => {
+    // arrange
+    const authorFirstName = 'Scottie'
+    const weekText = 'One'
+    const expectedOutput = 'scottie-week-one-power-rankings'
+
+    // act
+    const actualOutput = createNewPostDirectoryName(authorFirstName, weekText)
+
+    // assert
+    assert.equal(expectedOutput, actualOutput)
+  })
+  it('should create path for the new post directory', () => {
+    // arrange
+    const presentWorkingDirectory =
+      '/Users/scottenriquez/Documents/GitHub/gatsby-frontend/TWIATH'
+    const newDirectoryName = 'scottie-week-one-power-rankings'
+    const expectedOutput =
+      '/Users/scottenriquez/Documents/GitHub/gatsby-frontend/TWIATH/content/blog/posts/scottie-week-one-power-rankings'
+
+    // act
+    const actualOutput = createPathForNewPostDirectory(
+      presentWorkingDirectory,
+      newDirectoryName
     )
 
     // assert
