@@ -11,11 +11,15 @@ import { getLeagueMembers, getLeagueRosters } from '../lib/league/sleeper.js'
 import { generateMarkdown } from '../lib/service/markdown.js'
 import {
   createNewPostDirectory,
-  doesCurrentPathContainGatsbyConfig, writeMarkdownToFile,
+  doesCurrentPathContainGatsbyConfig,
+  writeMarkdownToFile,
 } from '../lib/service/file.js'
 import { downloadAvatars } from '../lib/service/image.js'
 import { getCurrentGitBranchName } from '../lib/service/git.js'
-import {createNewPostDirectoryName, createPathForNewPostDirectory} from '../lib/service/path.js'
+import {
+  createNewPostDirectoryName,
+  createPathForNewPostDirectory,
+} from '../lib/service/path.js'
 
 const require = createRequire(import.meta.url)
 const program = require('commander')
@@ -23,7 +27,6 @@ const colors = require('colors')
 const emoji = require('node-emoji')
 const pckg = require('../package.json')
 
-// TODO: centralize this variable and pass to file.js
 const presentWorkingDirectory = process.env.PWD
 
 program.version(pckg.version)
@@ -36,40 +39,46 @@ program
   .action(async (week, author) => {
     const normalizedAuthorFirstName = validateAuthor(author)
     const validatedWeekInteger = validateWeek(parseInt(week))
+    const weekText = weeks[validatedWeekInteger]
     if (normalizedAuthorFirstName && validatedWeekInteger) {
       console.log(
         colors.green(
           emoji.emojify(
-            `:white_check_mark: Generating Markdown for week ${weeks[validatedWeekInteger]} post by ${normalizedAuthorFirstName}`
+            `:white_check_mark: Generating Markdown for week ${weekText} post by ${normalizedAuthorFirstName}`
           )
         )
       )
       const currentGitBranchName = await getCurrentGitBranchName()
       if (
-        doesCurrentPathContainGatsbyConfig() &&
+        doesCurrentPathContainGatsbyConfig(presentWorkingDirectory) &&
         currentGitBranchName &&
         currentGitBranchName !== gatsby.mainBranchName
       ) {
         // TODO: refactor path method
         const newPostDirectoryName = createNewPostDirectoryName(
           normalizedAuthorFirstName,
-          weeks[validatedWeekInteger]
+          weekText
         )
         const newPostDirectoryPath = createPathForNewPostDirectory(
           presentWorkingDirectory,
           newPostDirectoryName
         )
         createNewPostDirectory(
+          presentWorkingDirectory,
           normalizedAuthorFirstName,
-          weeks[validatedWeekInteger]
+          weekText
         )
         const leagueMembers = await getLeagueMembers()
         const leagueRosters = await getLeagueRosters()
-        await downloadAvatars(leagueMembers, weeks[validatedWeekInteger], normalizedAuthorFirstName)
+        await downloadAvatars(
+          leagueMembers,
+          weekText,
+          normalizedAuthorFirstName
+        )
         const markdownText = generateMarkdown(
           normalizedAuthorFirstName,
           authors[normalizedAuthorFirstName],
-          capitalizeOnlyFirstLetter(weeks[validatedWeekInteger]),
+          capitalizeOnlyFirstLetter(weekText),
           generateRandomAdjective(),
           leagueMembers,
           leagueRosters
@@ -80,6 +89,13 @@ program
           )
         )
         writeMarkdownToFile(newPostDirectoryPath, markdownText)
+        console.log(
+          colors.green(
+            emoji.emojify(
+              `:white_check_mark: Writing index.md to ${newPostDirectoryPath}`
+            )
+          )
+        )
       } else {
         console.log(
           colors.red(
@@ -98,7 +114,7 @@ program
         console.log(
           colors.red(
             emoji.emojify(
-              `:: The current Git branch is ${currentGitBranchName}`
+              `:x: The current Git branch is ${currentGitBranchName}`
             )
           )
         )
