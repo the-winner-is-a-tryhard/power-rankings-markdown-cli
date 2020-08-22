@@ -17,8 +17,10 @@ import {
 import { downloadAvatars } from '../lib/service/image.js'
 import { getCurrentGitBranchName } from '../lib/service/git.js'
 import {
+  createPathForGatsbyConfig,
   createNewPostDirectoryName,
   createPathForNewPostDirectory,
+  createPathForMarkdownPost,
 } from '../lib/service/path.js'
 
 const require = createRequire(import.meta.url)
@@ -49,12 +51,12 @@ program
         )
       )
       const currentGitBranchName = await getCurrentGitBranchName()
+      const pathForGatsbyConfig = createPathForGatsbyConfig(presentWorkingDirectory)
       if (
-        doesCurrentPathContainGatsbyConfig(presentWorkingDirectory) &&
+        doesCurrentPathContainGatsbyConfig(presentWorkingDirectory, pathForGatsbyConfig) &&
         currentGitBranchName &&
         currentGitBranchName !== gatsby.mainBranchName
       ) {
-        // TODO: refactor path method
         const newPostDirectoryName = createNewPostDirectoryName(
           normalizedAuthorFirstName,
           weekText
@@ -65,8 +67,7 @@ program
         )
         createNewPostDirectory(
           presentWorkingDirectory,
-          normalizedAuthorFirstName,
-          weekText
+          newPostDirectoryPath
         )
         const leagueMembers = await getLeagueMembers()
         const leagueRosters = await getLeagueRosters()
@@ -88,7 +89,8 @@ program
             emoji.emojify(`:mega: Echoing post preview\n${markdownText}`)
           )
         )
-        writeMarkdownToFile(newPostDirectoryPath, markdownText)
+        const pathForMarkdownPost = createPathForMarkdownPost(newPostDirectoryPath)
+        writeMarkdownToFile(pathForMarkdownPost, markdownText)
         console.log(
           colors.green(
             emoji.emojify(
