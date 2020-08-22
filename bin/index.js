@@ -51,9 +51,14 @@ program
         )
       )
       const currentGitBranchName = await getCurrentGitBranchName()
-      const pathForGatsbyConfig = createPathForGatsbyConfig(presentWorkingDirectory)
+      const pathForGatsbyConfig = createPathForGatsbyConfig(
+        presentWorkingDirectory
+      )
       if (
-        doesCurrentPathContainGatsbyConfig(presentWorkingDirectory, pathForGatsbyConfig) &&
+        doesCurrentPathContainGatsbyConfig(
+          presentWorkingDirectory,
+          pathForGatsbyConfig
+        ) &&
         currentGitBranchName &&
         currentGitBranchName !== gatsby.mainBranchName
       ) {
@@ -65,10 +70,7 @@ program
           presentWorkingDirectory,
           newPostDirectoryName
         )
-        createNewPostDirectory(
-          presentWorkingDirectory,
-          newPostDirectoryPath
-        )
+        createNewPostDirectory(presentWorkingDirectory, newPostDirectoryPath)
         const leagueMembers = await getLeagueMembers()
         const leagueRosters = await getLeagueRosters()
         await downloadAvatars(
@@ -89,7 +91,9 @@ program
             emoji.emojify(`:mega: Echoing post preview\n${markdownText}`)
           )
         )
-        const pathForMarkdownPost = createPathForMarkdownPost(newPostDirectoryPath)
+        const pathForMarkdownPost = createPathForMarkdownPost(
+          newPostDirectoryPath
+        )
         writeMarkdownToFile(pathForMarkdownPost, markdownText)
         console.log(
           colors.green(
