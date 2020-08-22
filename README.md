@@ -18,7 +18,7 @@ npm link
 spr --version
 ```
 
-The CLI source code doesn't store any secrets, so ensure that the AWS CLI is installed and that the credentials configured at `~/.aws/credentials`.
+The CLI source code doesn't store any secrets, so ensure that the AWS CLI is installed and that the credentials are configured at `~/.aws/credentials`.
 
 ```shell script
 [default]
@@ -36,7 +36,7 @@ Navigate to the root folder of the league's Gatsby site, and run `spr add <WEEK_
 
 - Validates the week number and author first name
 - Checks the current Git branch to ensure that the user has created a non-main branch
-- Validates that the present working directory contains a Gatsby configuration file to standardize the relative paths
+- Verifies that the present working directory contains a Gatsby configuration file to standardize the relative paths
 - Fetches the league members and rosters from the Sleeper API
 - Fetches the current avatar for each league member and copies to a CDN hosted in AWS
 - Generates Markdown power rankings with the member's latest stats neatly formatted
@@ -44,7 +44,7 @@ Navigate to the root folder of the league's Gatsby site, and run `spr add <WEEK_
 
 ## Configuration
 
-The league-specific details exist in various JavaScript configuration files to maximize reusability. While the CLI is tightly-coupled with Gatsby, there's still much than can be reconfigured for other leagues.
+The league-specific details exist in various JavaScript configuration files to maximize reusability. While the CLI is tightly-coupled with Gatsby, there's still much that can be reconfigured for other leagues.
 
 ### `/lib/config/gatsby.js`
 
