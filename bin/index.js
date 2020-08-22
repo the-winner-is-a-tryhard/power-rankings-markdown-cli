@@ -11,11 +11,11 @@ import { getLeagueMembers, getLeagueRosters } from '../lib/league/sleeper.js'
 import { generateMarkdown } from '../lib/service/markdown.js'
 import {
   createNewPostDirectory,
-  doesCurrentPathContainGatsbyConfig,
+  doesCurrentPathContainGatsbyConfig, writeMarkdownToFile,
 } from '../lib/service/file.js'
 import { downloadAvatars } from '../lib/service/image.js'
 import { getCurrentGitBranchName } from '../lib/service/git.js'
-import { createNewPostDirectoryName } from '../lib/service/path'
+import {createNewPostDirectoryName, createPathForNewPostDirectory} from '../lib/service/path.js'
 
 const require = createRequire(import.meta.url)
 const program = require('commander')
@@ -55,13 +55,17 @@ program
           normalizedAuthorFirstName,
           weeks[validatedWeekInteger]
         )
+        const newPostDirectoryPath = createPathForNewPostDirectory(
+          presentWorkingDirectory,
+          newPostDirectoryName
+        )
         createNewPostDirectory(
           normalizedAuthorFirstName,
           weeks[validatedWeekInteger]
         )
         const leagueMembers = await getLeagueMembers()
         const leagueRosters = await getLeagueRosters()
-        await downloadAvatars(leagueMembers, newPostDirectoryName)
+        await downloadAvatars(leagueMembers, weeks[validatedWeekInteger], normalizedAuthorFirstName)
         const markdownText = generateMarkdown(
           normalizedAuthorFirstName,
           authors[normalizedAuthorFirstName],
@@ -75,6 +79,7 @@ program
             emoji.emojify(`:mega: Echoing post preview\n${markdownText}`)
           )
         )
+        writeMarkdownToFile(newPostDirectoryPath, markdownText)
       } else {
         console.log(
           colors.red(
