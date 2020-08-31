@@ -42,7 +42,10 @@ program
     const normalizedAuthorFirstName = validateAuthor(author)
     const validatedWeekInteger = validateWeek(parseInt(week))
     const weekText = weeks[validatedWeekInteger]
-    if (normalizedAuthorFirstName && validatedWeekInteger) {
+    if (
+      normalizedAuthorFirstName &&
+      (validatedWeekInteger === 0 || validatedWeekInteger)
+    ) {
       console.log(
         colors.green(
           emoji.emojify(
