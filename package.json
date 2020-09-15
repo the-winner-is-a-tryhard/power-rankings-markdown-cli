@@ -1,6 +1,6 @@
 {
   "name": "power-rankings-markdown-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CLI tool for generating Markdown for power rankings posts with Sleeper data",
   "main": "index.js",
   "type": "module",
