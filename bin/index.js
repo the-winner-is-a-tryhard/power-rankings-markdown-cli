@@ -7,7 +7,11 @@ import { generateRandomAdjective } from '../lib/service/adjective.js'
 import { capitalizeOnlyFirstLetter } from '../lib/service/casing.js'
 import { validateAuthor } from '../lib/validation/author.js'
 import { validateWeek } from '../lib/validation/week.js'
-import { getLeagueMembers, getLeagueRosters } from '../lib/league/sleeper.js'
+import {
+  getLeagueMatchups,
+  getLeagueMembers,
+  getLeagueRosters,
+} from '../lib/league/sleeper.js'
 import { generateMarkdown } from '../lib/service/markdown.js'
 import {
   createNewPostDirectory,
@@ -76,18 +80,20 @@ program
         createNewPostDirectory(presentWorkingDirectory, newPostDirectoryPath)
         const leagueMembers = await getLeagueMembers()
         const leagueRosters = await getLeagueRosters()
+        const leagueMatchups = await getLeagueMatchups(2)
         await downloadAvatars(
           leagueMembers,
           weekText,
           normalizedAuthorFirstName
         )
-        const markdownText = generateMarkdown(
+        const markdownText = await generateMarkdown(
           normalizedAuthorFirstName,
           authors[normalizedAuthorFirstName],
           capitalizeOnlyFirstLetter(weekText),
           generateRandomAdjective(),
           leagueMembers,
-          leagueRosters
+          leagueRosters,
+          leagueMatchups
         )
         console.log(
           colors.green(
