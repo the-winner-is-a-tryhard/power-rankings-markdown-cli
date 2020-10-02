@@ -31,11 +31,19 @@ const require = createRequire(import.meta.url)
 const program = require('commander')
 const colors = require('colors')
 const emoji = require('node-emoji')
+const path = require('path')
 const pckg = require('../package.json')
 
 const presentWorkingDirectory = process.env.PWD
 
 program.version(pckg.version)
+program
+  .command('test')
+  .alias('t')
+  .description('Local testing')
+  .action(() => {
+    console.log(__dirname)
+  })
 program
   .command('new <week> <author>')
   .alias('n')
