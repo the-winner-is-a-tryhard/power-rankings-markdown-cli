@@ -30,7 +30,7 @@ If not, run `aws configure`.
 
 ## Usage
 
-Navigate to the root folder of the league's Gatsby site, and run `spr add <WEEK_NUMBER> <AUTHOR_FIRST_NAME>`. The alias for `add` is `a`. Open the generated `index.md` file in the newly created directory (`<FIRST_NAME>-week-<WEEK_NUMBER>-power-rankings/`) to enter the power rankings text for the new post.
+Navigate to the root folder of the league's Gatsby site, and run `spr new <WEEK_NUMBER> <YEAR_NUMBER> <AUTHOR_FIRST_NAME>`. The alias for `new` is `n`. Open the generated `index.md` file in the newly created directory (`<FIRST_NAME>-week-<WEEK_NUMBER>-<YEAR_NUMBER>-power-rankings/`) to enter the power rankings text for the new post.
 
 ## Functionality
 

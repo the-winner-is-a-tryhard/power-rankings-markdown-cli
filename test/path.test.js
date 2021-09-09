@@ -46,10 +46,11 @@ describe('Path', () => {
     // arrange
     const authorFirstName = 'Scottie'
     const weekText = 'One'
-    const expectedOutput = 'scottie-week-one-power-rankings'
+    const year = 2021
+    const expectedOutput = 'scottie-week-one-2021-power-rankings'
 
     // act
-    const actualOutput = createNewPostDirectoryName(authorFirstName, weekText)
+    const actualOutput = createNewPostDirectoryName(authorFirstName, weekText, year)
 
     // assert
     assert.equal(expectedOutput, actualOutput)
