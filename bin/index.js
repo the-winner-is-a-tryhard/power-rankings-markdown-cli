@@ -7,6 +7,7 @@ import { generateRandomAdjective } from '../lib/service/adjective.js'
 import { capitalizeOnlyFirstLetter } from '../lib/service/casing.js'
 import { validateAuthor } from '../lib/validation/author.js'
 import { validateWeek } from '../lib/validation/week.js'
+import { validateYear } from '../lib/validation/year.js';
 import { getLeagueMembers, getLeagueRosters } from '../lib/league/sleeper.js'
 import { generateMarkdown } from '../lib/service/markdown.js'
 import {
@@ -33,18 +34,20 @@ const presentWorkingDirectory = process.env.PWD
 
 program.version(pckg.version)
 program
-  .command('new <week> <author>')
+  .command('new <week> <year> <author>')
   .alias('n')
   .description(
     'Create a new power ranking Markdown post with Sleeper data for a given week.'
   )
-  .action(async (week, author) => {
-    const normalizedAuthorFirstName = validateAuthor(author)
+  .action(async (week, year, author) => {
     const validatedWeekInteger = validateWeek(parseInt(week))
+    const validatedYearInteger = validateYear(parseInt(year))
+    const normalizedAuthorFirstName = validateAuthor(author)
     const weekText = weeks[validatedWeekInteger]
     if (
       normalizedAuthorFirstName &&
-      (validatedWeekInteger === 0 || validatedWeekInteger)
+      (validatedWeekInteger === 0 || validatedWeekInteger) &&
+      validatedYearInteger
     ) {
       console.log(
         colors.green(
@@ -67,7 +70,8 @@ program
       ) {
         const newPostDirectoryName = createNewPostDirectoryName(
           normalizedAuthorFirstName,
-          weekText
+          weekText,
+          year
         )
         const newPostDirectoryPath = createPathForNewPostDirectory(
           presentWorkingDirectory,
@@ -85,6 +89,7 @@ program
           normalizedAuthorFirstName,
           authors[normalizedAuthorFirstName],
           capitalizeOnlyFirstLetter(weekText),
+          validatedYearInteger,
           generateRandomAdjective(),
           leagueMembers,
           leagueRosters
