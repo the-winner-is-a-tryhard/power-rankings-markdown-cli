@@ -8,7 +8,7 @@ import { capitalizeOnlyFirstLetter } from '../lib/service/casing.js'
 import { validateAuthor } from '../lib/validation/author.js'
 import { validateWeek } from '../lib/validation/week.js'
 import { validateYear } from '../lib/validation/year.js';
-import { getLeagueMembers, getLeagueRosters } from '../lib/league/sleeper.js'
+import { getLeagueMembers, getLeagueRosters, getLeagueMatchups } from '../lib/league/sleeper.js'
 import { generateMarkdown } from '../lib/service/markdown.js'
 import {
   createNewPostDirectory,
@@ -28,6 +28,7 @@ const require = createRequire(import.meta.url)
 const program = require('commander')
 const colors = require('colors')
 const emoji = require('node-emoji')
+const path = require('path')
 const pckg = require('../package.json')
 
 const presentWorkingDirectory = process.env.PWD
@@ -80,19 +81,21 @@ program
         createNewPostDirectory(presentWorkingDirectory, newPostDirectoryPath)
         const leagueMembers = await getLeagueMembers()
         const leagueRosters = await getLeagueRosters()
+        const leagueMatchups = await getLeagueMatchups(2)
         await downloadAvatars(
           leagueMembers,
           weekText,
           normalizedAuthorFirstName
         )
-        const markdownText = generateMarkdown(
+        const markdownText = await generateMarkdown(
           normalizedAuthorFirstName,
           authors[normalizedAuthorFirstName],
           capitalizeOnlyFirstLetter(weekText),
           validatedYearInteger,
           generateRandomAdjective(),
           leagueMembers,
-          leagueRosters
+          leagueRosters,
+          leagueMatchups
         )
         console.log(
           colors.green(
