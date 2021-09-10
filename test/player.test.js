@@ -16,6 +16,7 @@ describe('Player', () => {
       last_name: 'Texans',
       first_name: 'Houston',
       fantasy_positions: ['DEF'],
+      injury_status: null,
       active: true,
     }
 
