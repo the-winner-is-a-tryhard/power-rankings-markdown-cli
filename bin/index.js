@@ -8,7 +8,7 @@ import { capitalizeOnlyFirstLetter } from '../lib/service/casing.js'
 import { validateAuthor } from '../lib/validation/author.js'
 import { validateWeek } from '../lib/validation/week.js'
 import { validateYear } from '../lib/validation/year.js';
-import { getLeagueMembers, getLeagueRosters } from '../lib/league/sleeper.js'
+import { getLeagueMembers, getLeagueRosters, getLeagueMatchups } from '../lib/league/sleeper.js'
 import { generateMarkdown } from '../lib/service/markdown.js'
 import {
   createNewPostDirectory,
