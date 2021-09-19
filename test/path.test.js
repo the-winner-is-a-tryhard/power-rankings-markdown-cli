@@ -50,7 +50,11 @@ describe('Path', () => {
     const expectedOutput = 'scottie-week-one-2021-power-rankings'
 
     // act
-    const actualOutput = createNewPostDirectoryName(authorFirstName, weekText, year)
+    const actualOutput = createNewPostDirectoryName(
+      authorFirstName,
+      weekText,
+      year
+    )
 
     // assert
     assert.equal(expectedOutput, actualOutput)
