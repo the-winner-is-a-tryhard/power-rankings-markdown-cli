@@ -85,7 +85,7 @@ program
         createNewPostDirectory(presentWorkingDirectory, newPostDirectoryPath)
         const leagueMembers = await getLeagueMembers()
         const leagueRosters = await getLeagueRosters()
-        const leagueMatchups = await getLeagueMatchups(2)
+        const leagueMatchups = await getLeagueMatchups(validatedWeekInteger)
         await downloadAvatars(
           leagueMembers,
           weekText,
