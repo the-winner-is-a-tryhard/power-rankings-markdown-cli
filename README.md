@@ -68,7 +68,7 @@ const awsConfig = {
   // S3 bucket
   bucketName: 'twiath-site-cdn',
   // URL base to be used for source in <img> tag
-  cdnURLBase: 'https://d1yqxti3jheii7.cloudfront.net',
+  cdnURLBase: 'https://dxyip34awyjyf.cloudfront.net',
 }
 ```
 
