@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { createRequire } from 'module'
-import { gatsby } from '../lib/config/gatsby.js'
+import { docusaurus } from '../lib/config/docusaurus.js'
 import { authors } from '../lib/config/validAuthors.js'
 import { weeks } from '../lib/config/validWeeks.js'
 import { generateRandomAdjective } from '../lib/service/adjective.js'
@@ -71,7 +71,7 @@ program
           pathForGatsbyConfig
         ) &&
         currentGitBranchName &&
-        currentGitBranchName !== gatsby.mainBranchName
+        currentGitBranchName !== docusaurus.mainBranchName
       ) {
         const newPostDirectoryName = createNewPostDirectoryName(
           normalizedAuthorFirstName,
@@ -121,7 +121,7 @@ program
         console.log(
           colors.red(
             emoji.emojify(
-              `:x: This directory doesn't contain a Gatsby configuration file or is currently using the ${gatsby.mainBranchName} branch. Navigate to the TWIATH site directory (gatsby-frontend/TWIATH) and checkout a new branch.`
+              `:x: This directory doesn't contain a Gatsby configuration file or is currently using the ${docusaurus.mainBranchName} branch. Navigate to the TWIATH site directory (gatsby-frontend/TWIATH) and checkout a new branch.`
             )
           )
         )

@@ -46,14 +46,14 @@ Navigate to the root folder of the league's Gatsby site, and run `spr new <WEEK_
 
 The league-specific details exist in various JavaScript configuration files to maximize reusability. While the CLI is tightly-coupled with Gatsby, there's still much that can be reconfigured for other leagues.
 
-### `/lib/config/gatsby.js`
+### `/lib/config/docusaurus.js`
 
 ```javascript
-const gatsby = {
+const docusaurus = {
   // used to determine if the user created a new branch
   mainBranchName: 'master',
   // used to determine if the user is in the root Gatsby directory
-  configFileName: 'gatsby-config.js',
+  configFileName: 'docusaurus-config.js',
   // used to support any changes to the default blog path for vanity URLs
   postPath: '/content/blog/posts',
   // used to defer image styling for the avatar to the Gatsby site
